@@ -1,0 +1,435 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* --- Paleta --- */
+  --color-bg: #FAF7F0;
+  --color-paper: #FFFFFF;
+  --color-ink: #2B2825;
+  --color-ink-soft: #5C564E;
+  --color-line: #DCD4C2;
+
+  --color-accent: #C1502E;       /* sello / acción primaria */
+  --color-accent-dark: #9A3F23;
+
+  --color-manana: #3A7D44;       /* turno mañana */
+  --color-manana-bg: #E6F0E4;
+  --color-tarde: #2E5C8A;        /* turno tarde */
+  --color-tarde-bg: #E5EDF4;
+  --color-noche: #B8860B;        /* turno noche */
+  --color-noche-bg: #F5EEDC;
+
+  --color-success: #3A7D44;
+  --color-success-bg: #E6F0E4;
+  --color-error: #B0402E;
+  --color-error-bg: #F7E6E2;
+
+  --font-display: 'Lora', Georgia, serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+
+  --radius: 4px;
+  --shadow-card: 0 2px 8px rgba(43, 40, 37, 0.06);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  background-image:
+    linear-gradient(var(--color-line) 1px, transparent 1px);
+  background-size: 100% 2.1rem;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 2.5rem 1.75rem 4rem;
+}
+
+/* ---------- Encabezado ---------- */
+.app-header {
+  margin-bottom: 2rem;
+  border-bottom: 3px double var(--color-ink);
+  padding-bottom: 1.25rem;
+}
+
+.app-header__eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  font-weight: 700;
+  margin: 0 0 0.35rem;
+}
+
+.app-header h1 {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--color-ink);
+}
+
+.app-header p {
+  margin: 0.4rem 0 0;
+  color: var(--color-ink-soft);
+  font-size: 0.95rem;
+}
+
+/* ---------- Mensajes de éxito / error (toast) ---------- */
+.toast-wrap {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.toast {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 260px;
+  border-left: 4px solid transparent;
+  animation: toast-in 0.22s ease-out;
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.toast--success {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+  border-left-color: var(--color-success);
+}
+
+.toast--error {
+  background: var(--color-error-bg);
+  color: var(--color-error);
+  border-left-color: var(--color-error);
+}
+
+/* ---------- Tarjeta contenedora ---------- */
+.card {
+  background: var(--color-paper);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  padding: 1.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.card__title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card__title::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* ---------- Formulario ---------- */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.1rem 1.4rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field--full {
+  grid-column: 1 / -1;
+}
+
+.field label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  letter-spacing: 0.01em;
+}
+
+.field label .required-mark {
+  color: var(--color-accent);
+  margin-left: 2px;
+}
+
+/* Bordes dobles en TODOS los inputs, select y textarea */
+.field input,
+.field select {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 3px double var(--color-ink);
+  border-radius: var(--radius);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(193, 80, 46, 0.12);
+}
+
+.field input.is-invalid,
+.field select.is-invalid {
+  border-color: var(--color-error);
+}
+
+.field-error {
+  font-size: 0.78rem;
+  color: var(--color-error);
+  font-weight: 500;
+}
+
+/* Select de curso con color dinámico según turno, vía variable inline */
+.select-curso {
+  font-weight: 600;
+}
+
+.select-curso option[data-turno="mañana"] { color: var(--color-manana); }
+.select-curso option[data-turno="tarde"]  { color: var(--color-tarde); }
+.select-curso option[data-turno="noche"]  { color: var(--color-noche); }
+
+.select-curso.turno-manana { border-color: var(--color-manana); color: var(--color-manana); }
+.select-curso.turno-tarde  { border-color: var(--color-tarde); color: var(--color-tarde); }
+.select-curso.turno-noche  { border-color: var(--color-noche); color: var(--color-noche); }
+
+/* ---------- Botones ---------- */
+.btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.88rem;
+  padding: 0.65rem 1.3rem;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.1s ease, opacity 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.btn:active { transform: scale(0.97); }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.btn--primary {
+  background: var(--color-accent);
+  color: #fff;
+}
+.btn--primary:hover:not(:disabled) { background: var(--color-accent-dark); }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-ink-soft);
+  border: 1.5px solid var(--color-line);
+}
+.btn--ghost:hover { border-color: var(--color-ink); color: var(--color-ink); }
+
+.btn--small {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.78rem;
+}
+
+.btn--edit { background: var(--color-tarde-bg); color: var(--color-tarde); }
+.btn--edit:hover { background: var(--color-tarde); color: #fff; }
+
+.btn--delete { background: var(--color-error-bg); color: var(--color-error); }
+.btn--delete:hover { background: var(--color-error); color: #fff; }
+
+.form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.7rem;
+  margin-top: 0.3rem;
+}
+
+/* ---------- Filtros ---------- */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.filters .field { min-width: 180px; flex: 1; }
+
+.turno-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.turno-btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.82rem;
+  padding: 0.55rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  border: 2px solid var(--color-line);
+  background: var(--color-paper);
+  color: var(--color-ink-soft);
+  transition: all 0.15s ease;
+}
+
+.turno-btn--manana.is-active { background: var(--color-manana); border-color: var(--color-manana); color: #fff; }
+.turno-btn--tarde.is-active  { background: var(--color-tarde); border-color: var(--color-tarde); color: #fff; }
+.turno-btn--noche.is-active  { background: var(--color-noche); border-color: var(--color-noche); color: #fff; }
+
+.turno-btn:hover:not(.is-active) { border-color: var(--color-ink-soft); }
+
+/* ---------- Tabla ---------- */
+.table-wrap { overflow-x: auto; }
+
+table.alumnos-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.alumnos-table thead th {
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+  border-bottom: 3px double var(--color-ink);
+  padding: 0.7rem 0.8rem;
+  white-space: nowrap;
+}
+
+.alumnos-table tbody td {
+  padding: 0.85rem 0.8rem;
+  border-bottom: 1px solid var(--color-line);
+  vertical-align: middle;
+}
+
+.alumnos-table tbody tr:hover { background: rgba(193, 80, 46, 0.035); }
+
+.badge-turno {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  text-transform: capitalize;
+}
+
+.badge-turno--manana { background: var(--color-manana-bg); color: var(--color-manana); }
+.badge-turno--tarde  { background: var(--color-tarde-bg); color: var(--color-tarde); }
+.badge-turno--noche  { background: var(--color-noche-bg); color: var(--color-noche); }
+
+.nota-pill {
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.nota-pill--sin-nota { color: var(--color-ink-soft); font-style: italic; font-weight: 400; font-family: var(--font-body); font-size: 0.85rem; }
+
+.row-actions { display: flex; gap: 0.5rem; }
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--color-ink-soft);
+}
+
+.empty-state strong { display: block; font-family: var(--font-display); font-size: 1.05rem; color: var(--color-ink); margin-bottom: 0.3rem; }
+
+/* ---------- Modal ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(43, 40, 37, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 90;
+  padding: 1rem;
+  animation: fade-in 0.15s ease-out;
+}
+
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+.modal-box {
+  background: var(--color-paper);
+  border-radius: var(--radius);
+  max-width: 560px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+  border: 1px solid var(--color-line);
+  animation: modal-in 0.18s ease-out;
+}
+
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 3px double var(--color-ink);
+}
+
+.modal-header h2 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--color-ink-soft);
+  padding: 0.2rem 0.4rem;
+}
+.modal-close:hover { color: var(--color-ink); }
+
+.modal-body { padding: 1.5rem; }
+
+@media (max-width: 640px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .filters .field { min-width: 100%; }
+}
