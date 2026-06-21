@@ -7,7 +7,7 @@ Trabajo académico: registro de alumnos vinculados a un curso, con relaciones en
 
 - **Backend:** Laravel 10 (PHP 8.0+) + Eloquent ORM
 - **Frontend:** Vue 3 + Vite
-- **Base de datos:** SQLite (un solo archivo, sin servidor de BD)
+- **Base de datos:** SQLite 
 
 ## Estructura de la base de datos (3FN)
 
