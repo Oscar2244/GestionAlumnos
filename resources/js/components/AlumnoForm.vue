@@ -54,7 +54,7 @@
         step="0.01"
         min="0"
         max="10"
-        placeholder="Opcional"
+        placeholder="Ingrese una nota"
         :class="{ 'is-invalid': errores.nota }"
       >
       <span v-if="errores.nota" class="field-error">{{ errores.nota }}</span>
